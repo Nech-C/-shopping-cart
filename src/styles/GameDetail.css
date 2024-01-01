@@ -1,26 +1,5 @@
-.home {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 2em;
-    padding: 0 2em;
-    margin: 2em 0;
-}
-
-/* App.css or wherever your main styles are */
-/* App.css or wherever your main styles are */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    overflow-y: auto; /* Enable scrolling */
-    z-index: 1000;
-  }
-  
-  /* GameDetail.css */
-  .game-detail {
+/* GameDetail.css */
+.game-detail {
     position: relative;
     width: 60%; /* Adjust width as needed */
     max-width: 800px; /* Maximum width of the content */
