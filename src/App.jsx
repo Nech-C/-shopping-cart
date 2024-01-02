@@ -6,7 +6,28 @@ function App() {
   const [gameList, setGameList] = useState([]);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [selectedGameId, setSelectedGameId] = useState(null);
+  const [cart, setCart] = useState({}); // Format will be { gameId: quantity }
 
+  const addToCart = (gameId) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [gameId]: (prevCart[gameId] || 0) + 1,
+    }));
+  };
+
+  const incrementQuantity = (gameId) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [gameId]: prevCart[gameId] + 1,
+    }));
+  };
+
+  const decrementQuantity = (gameId) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [gameId]: Math.max(0, prevCart[gameId] - 1),
+    }));
+  };
 
 
   useEffect(() => {
@@ -33,10 +54,15 @@ function App() {
             key={game.id}
             title={game["name"]}
             imgSrc={game.background_image}
+            id={game.id}
             platList={game.platforms.map((platform) => 
               platform.platform.name
             )}
             onClick={() => handleCardClick(game.id)}
+            addToCart={addToCart}
+            incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
+            quantity={cart[game.id] || 0}
           />
         );
       })}

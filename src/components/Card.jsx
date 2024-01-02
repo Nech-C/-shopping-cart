@@ -30,6 +30,7 @@ function Card(props) {
     const tagRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
+    
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
@@ -54,32 +55,44 @@ function Card(props) {
     }
 
     return <div className="item-card" onClick={props.onClick}>
-        <img className="item-img" src={props["imgSrc"]}></img>
-        <div className="item-body">
-            <div className="item-title">
-                {props["title"]}
+            <img className="item-img" src={props["imgSrc"]}></img>
+            <div className="item-body">
+                <div className="item-title">
+                    {props["title"]}
+                </div>
+                <div className="item-plat">
+                {uniquePlatforms.map((icon, index) => {
+                    return <FontAwesomeIcon key={`platform-icon-${index}`} icon={icon} className="platform-icon" />;
+                })}
+
+                </div>
+                <div
+                    className="tags"
+                    ref={tagRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseUp}>
+                        {props["tagList"].map(
+                            (tag) => 
+                                (<span className="item-tag" key={tag}>{tag}</span>)
+                            
+                        )}
+                </div>
+                <div className="item-price">{props["price"]}</div>
             </div>
-            <div className="item-plat">
-            {uniquePlatforms.map(platform => {
-                return <FontAwesomeIcon key={platform} icon={platform} className="platform-icon" />;
-            })}
+            <div className="item-addToCart">
+                {props.quantity > 0 ? (
+                <div>
+                    <button onClick={(e) => {e.stopPropagation(); props.decrementQuantity(props.id)}}>-</button>
+                    <span>{props.quantity}</span>
+                    <button onClick={(e) => {e.stopPropagation(); props.incrementQuantity(props.id)}}>+</button>
+                </div>
+                ) : (
+                <button onClick={(e) => {e.stopPropagation(); props.addToCart(props.id)}}>Add To Cart</button>
+                )}
+      </div>
         </div>
-            <div
-                className="tags"
-                ref={tagRef}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseUp}>
-                    {props["tagList"].map(
-                        (tag) => 
-                            (<span className="item-tag" key={tag}>{tag}</span>)
-                        
-                    )}
-            </div>
-            <div className="item-price">{props["price"]}</div>
-        </div>
-    </div>
 }
 
 
@@ -90,7 +103,13 @@ Card.propTypes = {
     price: PropType.number,
     tagList: PropType.array,
     platList: PropType.array,
+    quantity: PropType.number,
+    id: PropType.number,
+
     onClick: PropType.func,
+    addToCart: PropType.func.isRequired,
+    incrementQuantity: PropType.func.isRequired,
+    decrementQuantity: PropType.func.isRequired,
 }
 
 Card.defaultProps = {
@@ -101,6 +120,9 @@ Card.defaultProps = {
     platList: ["XBOX", "PC", "PS", "IOS", "ANDROID", "Linux", "SWITCH"],
     onClick: () => {
         console.log("Clicked");
+    },
+    addToCart: () => {
+        console.log("Added to cart");
     },
 }
 

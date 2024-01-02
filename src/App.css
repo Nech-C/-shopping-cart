@@ -19,31 +19,4 @@
     z-index: 1000;
   }
   
-  /* GameDetail.css */
-  .game-detail {
-    position: relative;
-    width: 60%; /* Adjust width as needed */
-    max-width: 800px; /* Maximum width of the content */
-    margin: 20px auto; /* Center the box with margin */
-    background-color: #fff; /* Background color for the content */
-    padding: 20px; /* Padding around the content */
-    border-radius: 8px; /* Optional: for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for box shadow */
-    z-index: 1001; /* Above the overlay background */
-  }
-  
-  .game-img {
-    display: block; /* Remove inline properties */
-    max-height: 400px; /* Fixed size for images */
-    width: 100%; /* Make the image responsive */
-    object-fit: cover; /* Ensure the image covers the area well */
-    border-radius: 8px; /* Optional: for rounded corners of the image */
-  }
-  
-  .game-desc {
-    max-height: 200px; /* Fixed size for description */
-    overflow-y: auto; /* Enable scrolling for overflow content */
-    margin-top: 20px;
-  }
-  
   
