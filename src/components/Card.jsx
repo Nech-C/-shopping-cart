@@ -33,6 +33,7 @@ function Card(props) {
     
 
     const handleMouseDown = (e) => {
+        e.stopPropagation();
         setIsDragging(true);
         setPosition({
             x: e.clientX,
@@ -41,6 +42,7 @@ function Card(props) {
     };
 
     const handleMouseMove = (e) => {
+        e.stopPropagation();
         if (isDragging){
             const element = tagRef.current;
             const deltaX = e.clientX - position.x;
@@ -50,7 +52,8 @@ function Card(props) {
         }
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (e) => {
+        e.stopPropagation();
         setIsDragging(false);
     }
 
@@ -72,12 +75,14 @@ function Card(props) {
                     onMouseDown={handleMouseDown}
                     onMouseUp={handleMouseUp}
                     onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseUp}>
+                    onMouseLeave={handleMouseUp}
+                    onClick={(e)=>{e.stopPropagation()}}>
                         {props["tagList"].map(
                             (tag) => 
                                 (<span className="item-tag" key={tag}>{tag}</span>)
                             
                         )}
+
                 </div>
                 <div className="item-price">{props["price"]}</div>
             </div>
