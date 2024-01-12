@@ -3,11 +3,8 @@ import PropType from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXbox, faPlaystation, faSteam, faApple, faAndroid, faLinux } from '@fortawesome/free-brands-svg-icons';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'; // Import from free-solid-svg-icons
-
-// ... rest of your code
-
 import { useRef, useState } from "react";
-
+import { defaultGameObject } from "../../lib/api";
 
 function Card(props) {
     const platformIcons = {
@@ -25,8 +22,13 @@ function Card(props) {
         'Nintendo Switch': faGamepad, // Assuming you use faGamepad for Nintendo Switch
         // ... add other platforms as necessary
     };
-    let uniquePlatforms = props.platList.map((platform) => platformIcons[platform] || faGamepad);
-    uniquePlatforms = [...new Set(uniquePlatforms)]; 
+
+    // process the game object
+    const processedGameObject = processGameObject(props.gameObject);
+
+    let uniquePlatforms = processedGameObject.platList.map((platform) => platformIcons[platform] || faGamepad);
+    uniquePlatforms = [...new Set(uniquePlatforms)];
+  
     const tagRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -58,10 +60,10 @@ function Card(props) {
     }
 
     return <div className="item-card" onClick={props.onClick}>
-            <img className="item-img" src={props["imgSrc"]}></img>
+            <img className="item-img" src={processedGameObject["imgSrc"]}></img>
             <div className="item-body">
                 <div className="item-title">
-                    {props["title"]}
+                    {processedGameObject["title"]}
                 </div>
                 <div className="item-plat">
                 {uniquePlatforms.map((icon, index) => {
@@ -77,58 +79,51 @@ function Card(props) {
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseUp}
                     onClick={(e)=>{e.stopPropagation()}}>
-                        {props["tagList"].map(
+                        {processedGameObject["tagList"]
+                        .filter(tag => tag['language'] === 'eng')
+                        .map(
                             (tag) => 
-                                (<span className="item-tag" key={tag}>{tag}</span>)
+                                (<span className="item-tag" key={tag['name']}>{tag['name']}</span>)
                             
                         )}
 
                 </div>
-                <div className="item-price">{props["price"]}</div>
+                <div className="item-price">*{props["price"]}</div>
             </div>
-            <div className="item-addToCart">
-                {props.quantity > 0 ? (
-                <div>
-                    <button onClick={(e) => {e.stopPropagation(); props.decrementQuantity(props.id)}}>-</button>
-                    <span>{props.quantity}</span>
-                    <button onClick={(e) => {e.stopPropagation(); props.incrementQuantity(props.id)}}>+</button>
-                </div>
-                ) : (
-                <button onClick={(e) => {e.stopPropagation(); props.addToCart(props.id)}}>Add To Cart</button>
-                )}
-      </div>
+            
         </div>
 }
 
+function processGameObject(gameObject) {
+    const { id, name, background_image, platforms, genres, tags, price } = gameObject;
+    const tagList = tags.map((tag) => tag.name);
+    const platList = platforms.map((platform) => platform.platform.name);
+    const processedGameObject = {
+        id,
+        title: name,
+        imgSrc: background_image,
+        platList,
+        tagList,
+        price,
+    };
 
+    return processedGameObject;
+}
 
 Card.propTypes = {
-    imgSrc: PropType.string,
-    title: PropType.string,
-    price: PropType.number,
-    tagList: PropType.array,
-    platList: PropType.array,
-    quantity: PropType.number,
-    id: PropType.number,
-
+    gameObject: PropType.object,
     onClick: PropType.func,
-    addToCart: PropType.func.isRequired,
-    incrementQuantity: PropType.func.isRequired,
-    decrementQuantity: PropType.func.isRequired,
+    price: 9.99
 }
 
 Card.defaultProps = {
-    imgSrc: "https://th.bing.com/th/id/R.3aec4259a605034d28aaf2fe46ad4e39?rik=b3BqFol2UflxTg&riu=http%3a%2f%2fmedia.blizzard.com%2fsc2%2fmedia%2fwallpapers%2fwall061%2fwall061-2048x1536-standard.jpg&ehk=jXwWdHYPWfF05LYezjDzXLEAKCTJENm0NRqh7bHGG6Y%3d&risl=&pid=ImgRaw&r=0",
-    title: "Starw3t 2",
-    price: 9.99,
-    tagList: ["RPG", "Soulslike", "RTS", "Strategy", "MOBA", "Sandbox", "Open World"],
-    platList: ["XBOX", "PC", "PS", "IOS", "ANDROID", "Linux", "SWITCH"],
+    gameObject: defaultGameObject,
     onClick: () => {
         console.log("Clicked");
     },
-    addToCart: () => {
-        console.log("Added to cart");
-    },
+
 }
+
+
 
 export default Card;
