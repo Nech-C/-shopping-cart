@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.home-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0; /* Add some padding at the top and bottom */
+}
+
+.new-releases {
+    width: 85%; /* Adjust the width to be responsive */
+    max-width: 1380px; /* Maximum width to ensure it looks good on large screens */
+    margin: 0 auto;
+    background-color: #1e1e1e; /* Dark background for contrast */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 8px; /* Rounded corners for modern look */
+}
+
+.section-heading {
+    color: #fff;
+    font-size: 3rem; /* Slightly smaller for better balance */
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.slider-container {
+    padding: 10px 10px 10px 0; /* Add horizontal padding */
+}
+
+
+.new-game-img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 4px; /* Match the container's border-radius */
+}
+
+.new-game-img:hover {
+    opacity: 0.9; /* Less opacity change for subtle effect */
+    cursor: pointer;
+    transition: opacity 0.3s; /* Smooth transition for hover effect */
+}
+
+.new-game-title {
+    color: #fff;
+    font-size: 1.5rem; /* Smaller size for the game title */
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 20px; /* More space after title */
+    text-align: center;
+}
+
+
+
+/* trending games */
+.recomm-heading {
+    color: #fff;
+    font-size: 3rem; /* Slightly smaller for better balance */
+    font-family: 'Roboto', sans-serif;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.recomm-games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-gap: 30px; /* Add some gap between columns */
+    width: 85%; /* Adjust the width to be responsive */
+    max-width: 1380px; /* Maximum width to ensure it looks good on large screens */
+    margin: 0 auto;
+    background-color: #1e1e1e; /* Dark background for contrast */
+    padding: 30px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 8px; /* Rounded corners for modern look */
+}
+
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+    .new-releases {
+        width: 95%; /* Full width on smaller screens */
+    }
+
+    .new-release-heading {
+        font-size: 2rem; /* Smaller font size on mobile */
+    }
+}
