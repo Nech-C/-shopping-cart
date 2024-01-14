@@ -1,9 +1,13 @@
-.home {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 2em;
-    padding: 0 2em;
-    margin: 2em 0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.app {
 }
 
 /* App.css or wherever your main styles are */
@@ -17,6 +21,11 @@
     background-color: rgba(0, 0, 0, 0.8);
     overflow-y: auto; /* Enable scrolling */
     z-index: 1000;
-  }
+}
+
+
+
+
+
   
   
