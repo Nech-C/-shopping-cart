@@ -4,6 +4,7 @@ import Card from './components/Card.jsx'
 import GameDetail from './components/GameDetail.jsx';
 import { Outlet } from 'react-router-dom';
 import { getGames } from '../lib/api'
+import SearchNavBar from './components/SearchNavBar.jsx';
 
 function TempHome() {
   const [gameList, setGameList] = useState([]);
@@ -82,7 +83,10 @@ function TempHome() {
 function App() {
   return (
     <div className="app">
-      <Outlet />
+      <SearchNavBar />
+      <div className='outlet-container'>
+        <Outlet />
+      </div>
     </div>
   );
 }
