@@ -113,7 +113,7 @@ function processGameObject(gameObject) {
 Card.propTypes = {
     gameObject: PropType.object,
     onClick: PropType.func,
-    price: 9.99
+    price: PropType.number,
 };
 
 Card.defaultProps = {
@@ -121,6 +121,7 @@ Card.defaultProps = {
     onClick: () => {
         console.log("Clicked");
     },
+    price: 9.99
 
 };
 
