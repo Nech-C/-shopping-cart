@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+}
+
+.search-dropdown img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
