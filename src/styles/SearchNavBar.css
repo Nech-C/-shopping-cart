@@ -31,13 +31,17 @@
 .search-input {
     max-width: 300px;
     width: 50%;
+    height: 35px;
 }
+
+
 
 .search-dropdown {
     position: absolute;
     top: 100%; /* Directly below the search input */
-    left: 15%;
-    width: 70%; /* As wide as the search container */
+    left: 35%;
+    width: 30%; /* As wide as the search container */
+    min-width: 300px;
     background: white;
     border: 1px solid #ddd;
     border-top: none;

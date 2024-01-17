@@ -32,14 +32,19 @@
 }
 
 .slider-container {
-    padding: 10px 10px 10px 0; /* Add horizontal padding */
+    padding: 30px; /* Add horizontal padding */
+
 }
 
+.new-game-card {
+    display: flex;
+    flex-direction: column;
+}
 
 .new-game-img {
-    width: 100%;
+    width: 70%;
     height: auto; /* Maintain aspect ratio */
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 4px; /* Match the container's border-radius */
 }
 
@@ -56,6 +61,7 @@
     margin-top: 10px;
     margin-bottom: 20px; /* More space after title */
     text-align: center;
+
 }
 
 

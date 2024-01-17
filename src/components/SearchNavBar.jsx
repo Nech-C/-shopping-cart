@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { searchGames } from "../../lib/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import SearchDropDown from "./SearchDropDown";
 
 function SearchNavBar(props) {
     const [searchQuery, setSearchQuery] = useState("");
@@ -37,14 +38,7 @@ function SearchNavBar(props) {
                     />
                 <button className="search-button"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                 {isDropdownOpen && searchResults.length > 0 && (
-                    <div className="search-dropdown">
-                        {searchResults.map((result, index) => (
-                            <div key={index} className="search-result-item">
-                                {/* Render your result item */}
-                                {result.title}
-                            </div>
-                        ))}
-                    </div>
+                    <SearchDropDown results={searchResults}/>
                 )}
                 
             </span>
