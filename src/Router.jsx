@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Home from "./components/Home";
+import GameDetailPage from "./components/GameDetailPage";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,11 @@ const router = createBrowserRouter([
             },
         ],
     },
+
+    {
+        path: "game/:id",
+        element: <GameDetailPage />,
+    }
 
 ]);
 
