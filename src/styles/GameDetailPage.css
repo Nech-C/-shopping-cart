@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.GameDetailPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Adjust the max-width as needed */
+  margin: auto;
+}
+
+.game-detail {
+  width: 100%;
+  text-align: center;
+}
+
+.game-title {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.game-album .album-slider-container {
+  width: 100%;
+  max-width: 100%; /* This makes sure the slider is as wide as the GameDetailPage */
+}
+
+.album-img {
+  width: 100%;
+  height: auto;
+  display: block; /* Ensures that the image takes up the full width of its container */
+}
+
+/* Add additional styles for the slider as needed */
+.slick-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* React-slick default styles overrides if needed */
+.slick-dots {
+  bottom: -30px; /* Adjust the position of the dots */
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #fff; /* Change the arrow colors */
+}
+
+/* You can add media queries to ensure responsiveness on different screen sizes */
+@media (max-width: 768px) {
+  .GameDetailPage {
+      width: 90%;
+  }
+  .game-title {
+      font-size: 1.5rem;
+  }
+}
