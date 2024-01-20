@@ -1,69 +1,73 @@
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "../styles/GameDetailPage.css"
 import Slider from "react-slick";
-import { useEffect, useState } from "react";
+import "../styles/GameDetailPage.css";
 import { getGameDetails, getGameScreenshots } from "../../lib/api";
 
-
-function GameDetailPage(props) {
-    const {id} = useParams();
+function GameDetailPage() {
+    const { id } = useParams();
     const [gameDetail, setGameDetail] = useState({});
     const [gameScreenshots, setGameScreenshots] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        async function fetchGameDetail() {
-            const gamedetail = await getGameDetails(id);
-            setGameDetail(gamedetail);
+        async function fetchData() {
+            try {
+                const details = await getGameDetails(id);
+                setGameDetail(details);
+                const screenshots = await getGameScreenshots(id);
+                setGameScreenshots(screenshots);
+            } catch (err) {
+                setError(err.message);
+            }
         }
-
-        async function fetchGameScreenshots() {
-            const screenshots = await getGameScreenshots(id);
-            setGameScreenshots(screenshots);
-        }
-
-        fetchGameDetail();
-        fetchGameScreenshots();
-
+        fetchData();
     }, [id]);
 
     const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-      };
+        // ... existing settings
+    };
+
+    if (error) {
+        return <div className="error-message">Error: {error}</div>;
+    }
+
+    const handleAddToCart = () => {
+        // Implement add to cart logic
+        console.log("Add to cart", gameDetail.id);
+    };
 
     return (
-        <div className="GameDetailPage">
-            <div className="game-detail">
-                <div className="game-title">
-                    {gameDetail.name}
+        <div className="game-detail-page">
+            <div className="game-detail-container">
+                <div className="game-detail-header">
+                    <h1 className="game-title">{gameDetail.name}</h1>
+                    <button className="add-to-cart-btn" onClick={handleAddToCart}>
+                        Add to Cart +
+                    </button>
                 </div>
                 <div className="game-album">
-                    <div className="album-slider-container">
-                        <Slider {...settings}>
-                            {<img className="detail-album-img" src={gameDetail.background_image} alt={gameDetail.name} />}
-                            {gameScreenshots.map((screenshot) => {
-                                return (
-                                        <img className="album-img" src={screenshot.image} alt={gameDetail.name} key={gameDetail.id}/>
-                                );
-                            })}
-                        </Slider>
+                    <Slider {...settings}>
+                        {gameDetail.background_image && (
+                            <img className="detail-album-img" src={gameDetail.background_image} alt={gameDetail.name} />
+                        )}
+                        {gameScreenshots.map((screenshot) => (
+                            <img className="album-img" src={screenshot.image} alt="Screenshot" key={screenshot.id} />
+                        ))}
+                    </Slider>
+                </div>
+                <div className="game-description">
+                    <p>{gameDetail.description}</p>
+                    <div className="game-meta">
+                        <span>Released: {gameDetail.released}</span>
+                        <span>Genres: {gameDetail.genres?.join(', ')}</span>
+                        <span>Platforms: {gameDetail.platforms?.join(', ')}</span>
+                        {/* ... other meta information */}
                     </div>
                 </div>
             </div>
         </div>
     );
-    
-}
-
-GameDetailPage.propTypes = {
-}
-
-GameDetailPage.defaultProps = {
 }
 
 export default GameDetailPage;

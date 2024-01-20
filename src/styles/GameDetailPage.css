@@ -4,61 +4,70 @@
   box-sizing: border-box;
 }
 
-.GameDetailPage {
+.game-detail-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
-  width: 100%;
-  max-width: 1200px; /* Adjust the max-width as needed */
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121212; /* Or any dark theme color */
+  color: #fff; /* For light text */
+}
+
+.game-detail-container {
+  width: 80%;
+  max-width: 1200px;
   margin: auto;
+  padding: 20px;
+  border-radius: 8px;
 }
 
-.game-detail {
-  width: 100%;
-  text-align: center;
-}
-
-.game-title {
-  font-size: 2.5rem;
-  color: #fff;
+.game-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.game-album .album-slider-container {
-  width: 100%;
-  max-width: 100%; /* This makes sure the slider is as wide as the GameDetailPage */
+.game-title {
+  font-size: 3rem;
+  font-weight: 700;
 }
 
+.add-to-cart-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+.game-album {
+  margin-bottom: 20px;
+}
+
+.detail-album-img,
 .album-img {
   width: 100%;
-  height: auto;
-  display: block; /* Ensures that the image takes up the full width of its container */
+  border-radius: 5px;
 }
 
-/* Add additional styles for the slider as needed */
-.slick-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.game-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
-/* React-slick default styles overrides if needed */
-.slick-dots {
-  bottom: -30px; /* Adjust the position of the dots */
+.game-meta {
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
-.slick-prev:before, .slick-next:before {
-  color: #fff; /* Change the arrow colors */
-}
-
-/* You can add media queries to ensure responsiveness on different screen sizes */
-@media (max-width: 768px) {
-  .GameDetailPage {
-      width: 90%;
-  }
-  .game-title {
-      font-size: 1.5rem;
-  }
+.error-message {
+  color: #ff6b6b; /* Error color */
 }
