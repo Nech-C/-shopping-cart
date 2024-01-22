@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "../styles/GameDetailPage.css";
 import { getGameDetails, getGameScreenshots } from "../../lib/api";
+import CartContext from '../contexts/CartContext.jsx';
 
 function GameDetailPage() {
     const { id } = useParams();
     const [gameDetail, setGameDetail] = useState({});
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [error, setError] = useState(null);
+
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
         async function fetchData() {
@@ -25,7 +28,11 @@ function GameDetailPage() {
     }, [id]);
 
     const settings = {
-        // ... existing settings
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 1
     };
 
     if (error) {
@@ -33,7 +40,7 @@ function GameDetailPage() {
     }
 
     const handleAddToCart = () => {
-        // Implement add to cart logic
+        addToCart(gameDetail.id);
         console.log("Add to cart", gameDetail.id);
     };
 
@@ -62,7 +69,6 @@ function GameDetailPage() {
                         <span>Released: {gameDetail.released}</span>
                         <span>Genres: {gameDetail.genres?.join(', ')}</span>
                         <span>Platforms: {gameDetail.platforms?.join(', ')}</span>
-                        {/* ... other meta information */}
                     </div>
                 </div>
             </div>
