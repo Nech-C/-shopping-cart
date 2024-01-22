@@ -22,10 +22,16 @@
 }
 
 .game-detail-header {
+  position: fixed;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background-color: #121212;
 }
 
 .game-title {
@@ -50,6 +56,7 @@
 
 .game-album {
   margin-bottom: 20px;
+  margin-top: 70px;
 }
 
 .detail-album-img,

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getNewReleases, getRecommendedGames, shuffleArray } from "../../lib/api";
 import Card from "./Card";
+import { useNavigate } from "react-router-dom";
 
 function Home(props) {
     const [newReleaseList, setReleaseList] = useState([]);
@@ -25,6 +26,12 @@ function Home(props) {
         fetchRecomm();
         fetchGames();
     }, []);
+
+    let navigate = useNavigate();
+
+    const handleClick = (id) => {
+        navigate(`/game/${id}`);
+    }
 
     const settings = {
         dots: true,
@@ -48,7 +55,7 @@ function Home(props) {
                                                                     .slice(0, 5)
                                                                     .map((game) => {
                             return (
-                                <div className="new-game-card" key={game.id}>
+                                <div className="new-game-card" key={game.id} onClick={() => handleClick(game.id)}>
                                     <img className="new-game-img" src={game.background_image} alt={game.name} />
                                     <h3 className="new-game-title">{game.name}</h3>
                                 </div>

@@ -5,6 +5,7 @@ import { faXbox, faPlaystation, faSteam, faApple, faAndroid, faLinux } from '@fo
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'; // Import from free-solid-svg-icons
 import { useRef, useState } from "react";
 import { defaultGameObject } from "../../lib/api";
+import { useNavigate } from "react-router-dom";
 
 function Card(props) {
     const platformIcons = {
@@ -12,7 +13,7 @@ function Card(props) {
         'PlayStation 4': faPlaystation,
         'PlayStation 3': faPlaystation,
         'Xbox Series S/X': faXbox,
-        'Xbox One': faXbox,
+        'Xbox One': faXbox, 
         'Xbox 360': faXbox,
         'PC': faSteam,
         'macOS': faApple,
@@ -33,6 +34,11 @@ function Card(props) {
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     
+    let navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/game/${props.gameObject.id}`);
+      };
 
     const handleMouseDown = (e) => {
         e.stopPropagation();
@@ -59,7 +65,7 @@ function Card(props) {
         setIsDragging(false);
     }
 
-    return <div className="item-card" onClick={props.onClick}>
+    return <div className="item-card" onClick={handleClick}>
             <img className="item-img" src={processedGameObject["imgSrc"]}></img>
             <div className="item-body">
                 <div className="item-title">
