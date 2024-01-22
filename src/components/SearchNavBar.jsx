@@ -5,11 +5,14 @@ import { searchGames } from "../../lib/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import SearchDropDown from "./SearchDropDown";
+import { useNavigate } from "react-router-dom";
 
 function SearchNavBar(props) {
     const [searchQuery, setSearchQuery] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (searchQuery !== "") {
@@ -28,6 +31,10 @@ function SearchNavBar(props) {
         setSearchQuery(e.target.value);
     }
 
+    const handleGotoCart = () => {
+        navigate("/cart");
+    }
+
     return (
         <div className="search-nav-bar">
             <span className="search">
@@ -44,7 +51,7 @@ function SearchNavBar(props) {
             </span>
             <span className="search-dropdown">
             </span>
-            <span className="cart">
+            <span className="cart" onClick={handleGotoCart}>
                 <FontAwesomeIcon icon={faCartShopping} />
             </span>
         </div>
