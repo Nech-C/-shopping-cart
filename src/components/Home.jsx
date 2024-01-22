@@ -33,6 +33,8 @@ function Home(props) {
         navigate(`/game/${id}`);
     }
 
+    
+
     const settings = {
         dots: true,
         infinite: true,
