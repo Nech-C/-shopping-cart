@@ -3,32 +3,30 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main  # Set this to your default branch
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Create Environment File
-        run: |
-          echo "VITE_RAWG_API_KEY=${{ secrets.RAWG_API_KEY }}" > .env
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Use the Node.js version that matches your development environment
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Build
-        run: npm run build
+    - name: Build
+      run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages  # The branch the action should deploy to.
+        folder: dist      # The folder the action should deploy.
+        token: ${{ secrets.GITHUB_TOKEN }}  # GitHub will automatically create this secret to use in your workflow.
